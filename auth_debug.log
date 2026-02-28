@@ -1,0 +1,197 @@
+[2026-02-21T05:23:22.432Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka1916"
+[2026-02-21T05:23:22.433Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka1916"
+[2026-02-21T05:23:22.436Z] [AUTH-DEBUG-V3] User found: kanishka1916 | Role: employee | Saved Hash Start: $2b$10$HzU
+[2026-02-21T05:23:22.560Z] [AUTH-DEBUG-V3] Comparison result for "kanishka1916": false
+[2026-02-21T05:23:22.561Z] [AUTH-DEBUG-V3] Login Failed: Password mismatch for "kanishka1916"
+[2026-02-21T05:23:34.504Z] [AUTH-DEBUG-V3] Login attempt for identifier: "karankumar3386"
+[2026-02-21T05:23:34.505Z] [AUTH-DEBUG-V3] Normalized Identifier: "karankumar3386"
+[2026-02-21T05:23:34.511Z] [AUTH-DEBUG-V3] User found: karankumar3386 | Role: employee | Saved Hash Start: $2b$10$jp2
+[2026-02-21T05:23:34.627Z] [AUTH-DEBUG-V3] Comparison result for "karankumar3386": true
+[2026-02-21T05:23:34.629Z] [AUTH-DEBUG-V3] Login SUCCESS for "karankumar3386"
+[2026-02-21T05:24:36.857Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka1916"
+[2026-02-21T05:24:36.858Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka1916"
+[2026-02-21T05:24:36.861Z] [AUTH-DEBUG-V3] User found: kanishka1916 | Role: employee | Saved Hash Start: $2b$10$HzU
+[2026-02-21T05:24:36.978Z] [AUTH-DEBUG-V3] Comparison result for "kanishka1916": false
+[2026-02-21T05:24:36.979Z] [AUTH-DEBUG-V3] Login Failed: Password mismatch for "kanishka1916"
+[2026-02-21T05:26:42.936Z] [AUTH-DEBUG-V3] Login attempt for identifier: "rakesh4209"
+[2026-02-21T05:26:42.936Z] [AUTH-DEBUG-V3] Normalized Identifier: "rakesh4209"
+[2026-02-21T05:26:42.945Z] [AUTH-DEBUG-V3] User found: rakesh4209 | Role: employee | Saved Hash Start: $2b$10$gYY
+[2026-02-21T05:26:43.096Z] [AUTH-DEBUG-V3] Comparison result for "rakesh4209": true
+[2026-02-21T05:26:43.098Z] [AUTH-DEBUG-V3] Login SUCCESS for "rakesh4209"
+[2026-02-21T05:49:09.079Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka1916"
+[2026-02-21T05:49:09.082Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka1916"
+[2026-02-21T05:49:09.088Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "kanishka1916"
+[2026-02-21T06:07:45.832Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2348"
+[2026-02-21T06:07:45.833Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2348"
+[2026-02-21T06:07:45.836Z] [AUTH-DEBUG-V3] User found: vikas2348 | Role: employee | Saved Hash Start: $2b$10$gGQ
+[2026-02-21T06:07:45.929Z] [AUTH-DEBUG-V3] Comparison result for "vikas2348": true
+[2026-02-21T06:07:45.933Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2348"
+[2026-02-21T06:14:36.970Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka1916"
+[2026-02-21T06:14:36.971Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka1916"
+[2026-02-21T06:14:36.974Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "kanishka1916"
+[2026-02-21T06:14:37.633Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka1916"
+[2026-02-21T06:14:37.634Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka1916"
+[2026-02-21T06:14:37.636Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "kanishka1916"
+[2026-02-21T06:18:50.789Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2348"
+[2026-02-21T06:18:50.790Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2348"
+[2026-02-21T06:18:50.793Z] [AUTH-DEBUG-V3] User found: vikas2348 | Role: employee | Saved Hash Start: $2b$10$ti1
+[2026-02-21T06:18:50.889Z] [AUTH-DEBUG-V3] Comparison result for "vikas2348": true
+[2026-02-21T06:18:50.892Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2348"
+[2026-02-21T06:46:12.011Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas4180"
+[2026-02-21T06:46:12.012Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas4180"
+[2026-02-21T06:46:12.014Z] [AUTH-DEBUG-V3] User found: vikas4180 | Role: employee | Saved Hash Start: $2b$10$NhC
+[2026-02-21T06:46:12.102Z] [AUTH-DEBUG-V3] Comparison result for "vikas4180": true
+[2026-02-21T06:46:12.104Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas4180"
+[2026-02-21T07:00:26.372Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-21T07:00:26.373Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-21T07:00:26.376Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$EVg
+[2026-02-21T07:00:26.462Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-21T07:00:26.471Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-21T07:02:33.110Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka6584"
+[2026-02-21T07:02:33.111Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka6584"
+[2026-02-21T07:02:33.113Z] [AUTH-DEBUG-V3] User found: kanishka6584 | Role: employee | Saved Hash Start: $2b$10$ytu
+[2026-02-21T07:02:33.199Z] [AUTH-DEBUG-V3] Comparison result for "kanishka6584": true
+[2026-02-21T07:02:33.205Z] [AUTH-DEBUG-V3] Login SUCCESS for "kanishka6584"
+[2026-02-21T07:08:28.546Z] [AUTH-DEBUG-V3] Login attempt for identifier: "mamta9413"
+[2026-02-21T07:08:28.548Z] [AUTH-DEBUG-V3] Normalized Identifier: "mamta9413"
+[2026-02-21T07:08:28.550Z] [AUTH-DEBUG-V3] User found: mamta9413 | Role: employee | Saved Hash Start: $2b$10$yZU
+[2026-02-21T07:08:28.635Z] [AUTH-DEBUG-V3] Comparison result for "mamta9413": true
+[2026-02-21T07:08:28.641Z] [AUTH-DEBUG-V3] Login SUCCESS for "mamta9413"
+[2026-02-23T06:14:43.229Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikasrajput1620@gmail.com"
+[2026-02-23T06:14:43.231Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikasrajput1620@gmail.com"
+[2026-02-23T06:14:43.279Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$EVg
+[2026-02-23T06:14:43.410Z] [AUTH-DEBUG-V3] Comparison result for "vikasrajput1620@gmail.com": false
+[2026-02-23T06:14:43.411Z] [AUTH-DEBUG-V3] Login Failed: Password mismatch for "vikasrajput1620@gmail.com"
+[2026-02-23T06:14:47.570Z] [AUTH-DEBUG-V3] Login attempt for identifier: "karankumar3386"
+[2026-02-23T06:14:47.571Z] [AUTH-DEBUG-V3] Normalized Identifier: "karankumar3386"
+[2026-02-23T06:14:47.580Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "karankumar3386"
+[2026-02-23T06:15:13.398Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-23T06:15:13.399Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-23T06:15:13.404Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$sXU
+[2026-02-23T06:15:13.519Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-23T06:15:13.560Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-23T06:21:35.599Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-23T06:21:35.600Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-23T06:21:35.604Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$PXI
+[2026-02-23T06:21:35.719Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-23T06:21:35.726Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-23T10:37:26.845Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas7293"
+[2026-02-23T10:37:26.846Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas7293"
+[2026-02-23T10:37:26.852Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "vikas7293"
+[2026-02-23T10:37:30.843Z] [AUTH-DEBUG-V3] Login attempt for identifier: "karankumar3386"
+[2026-02-23T10:37:30.843Z] [AUTH-DEBUG-V3] Normalized Identifier: "karankumar3386"
+[2026-02-23T10:37:30.845Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "karankumar3386"
+[2026-02-23T10:37:51.789Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-23T10:37:51.789Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-23T10:37:51.792Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$h.x
+[2026-02-23T10:37:51.880Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-23T10:37:51.886Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-23T10:38:48.109Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-23T10:38:48.110Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-23T10:38:48.112Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$h.x
+[2026-02-23T10:38:48.197Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-23T10:38:48.203Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-23T10:39:16.955Z] [AUTH-DEBUG-V3] Login attempt for identifier: "mamta9413"
+[2026-02-23T10:39:16.956Z] [AUTH-DEBUG-V3] Normalized Identifier: "mamta9413"
+[2026-02-23T10:39:16.958Z] [AUTH-DEBUG-V3] User found: mamta9413 | Role: employee | Saved Hash Start: $2b$10$LBt
+[2026-02-23T10:39:17.047Z] [AUTH-DEBUG-V3] Comparison result for "mamta9413": true
+[2026-02-23T10:39:17.053Z] [AUTH-DEBUG-V3] Login SUCCESS for "mamta9413"
+[2026-02-23T11:32:48.482Z] [AUTH-DEBUG-V3] Login attempt for identifier: "kanishka6584"
+[2026-02-23T11:32:48.483Z] [AUTH-DEBUG-V3] Normalized Identifier: "kanishka6584"
+[2026-02-23T11:32:48.485Z] [AUTH-DEBUG-V3] User found: kanishka6584 | Role: employee | Saved Hash Start: $2b$10$874
+[2026-02-23T11:32:48.571Z] [AUTH-DEBUG-V3] Comparison result for "kanishka6584": true
+[2026-02-23T11:32:48.576Z] [AUTH-DEBUG-V3] Login SUCCESS for "kanishka6584"
+[2026-02-23T12:02:47.719Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-23T12:02:47.719Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-23T12:02:47.722Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$2RT
+[2026-02-23T12:02:47.813Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-23T12:02:47.818Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-24T04:37:32.254Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-24T04:37:32.256Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-24T04:37:32.268Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$sXU
+[2026-02-24T04:37:32.394Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-24T04:37:32.418Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-24T04:38:43.016Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-24T04:38:43.017Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-24T04:38:43.022Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$tJF
+[2026-02-24T04:38:43.159Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-24T04:38:43.164Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-24T04:59:47.403Z] [AUTH-DEBUG-V3] Login attempt for identifier: "mamta9413"
+[2026-02-24T04:59:47.404Z] [AUTH-DEBUG-V3] Normalized Identifier: "mamta9413"
+[2026-02-24T04:59:47.407Z] [AUTH-DEBUG-V3] User found: mamta9413 | Role: employee | Saved Hash Start: $2b$10$/YR
+[2026-02-24T04:59:47.527Z] [AUTH-DEBUG-V3] Comparison result for "mamta9413": true
+[2026-02-24T04:59:47.534Z] [AUTH-DEBUG-V3] Login SUCCESS for "mamta9413"
+[2026-02-24T07:29:54.268Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas2455"
+[2026-02-24T07:29:54.272Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas2455"
+[2026-02-24T07:29:54.276Z] [AUTH-DEBUG-V3] User found: vikas2455 | Role: employee | Saved Hash Start: $2b$10$9R1
+[2026-02-24T07:29:54.365Z] [AUTH-DEBUG-V3] Comparison result for "vikas2455": true
+[2026-02-24T07:29:54.374Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas2455"
+[2026-02-24T12:56:49.640Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-24T12:56:49.644Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-24T12:56:49.649Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$sXU
+[2026-02-24T12:56:49.755Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-24T12:56:49.762Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-24T12:57:53.842Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas7580"
+[2026-02-24T12:57:53.843Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas7580"
+[2026-02-24T12:57:53.851Z] [AUTH-DEBUG-V3] User found: vikas7580 | Role: employee | Saved Hash Start: $2b$10$iOq
+[2026-02-24T12:57:53.944Z] [AUTH-DEBUG-V3] Comparison result for "vikas7580": true
+[2026-02-24T12:57:53.951Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas7580"
+[2026-02-25T08:22:19.061Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-25T08:22:19.063Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-25T08:22:19.077Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$JQe
+[2026-02-25T08:22:19.191Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-25T08:22:19.216Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-25T08:25:34.682Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas7580"
+[2026-02-25T08:25:34.682Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas7580"
+[2026-02-25T08:25:34.687Z] [AUTH-DEBUG-V3] User found: vikas7580 | Role: employee | Saved Hash Start: $2b$10$vWY
+[2026-02-25T08:25:34.777Z] [AUTH-DEBUG-V3] Comparison result for "vikas7580": true
+[2026-02-25T08:25:34.782Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas7580"
+[2026-02-25T09:07:46.073Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-25T09:07:49.261Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-25T09:07:49.772Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-25T10:55:57.132Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-25T10:56:02.318Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-25T10:56:02.761Z] [AUTH-DEBUG-V3] Login attempt for identifier: "undefined"
+[2026-02-26T06:04:33.191Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas7293"
+[2026-02-26T06:04:33.192Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas7293"
+[2026-02-26T06:04:33.205Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "vikas7293"
+[2026-02-26T06:04:57.947Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-26T06:04:57.968Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-26T06:04:57.974Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$JQe
+[2026-02-26T06:04:58.110Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-26T06:04:58.132Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-26T06:47:50.125Z] [AUTH-DEBUG-V3] Login attempt for identifier: "deepak7379"
+[2026-02-26T06:47:50.127Z] [AUTH-DEBUG-V3] Normalized Identifier: "deepak7379"
+[2026-02-26T06:47:50.131Z] [AUTH-DEBUG-V3] User found: deepak7379 | Role: employee | Saved Hash Start: $2b$10$2vc
+[2026-02-26T06:47:50.217Z] [AUTH-DEBUG-V3] Comparison result for "deepak7379": true
+[2026-02-26T06:47:50.226Z] [AUTH-DEBUG-V3] Login SUCCESS for "deepak7379"
+[2026-02-26T07:42:56.758Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vr9645"
+[2026-02-26T07:42:56.760Z] [AUTH-DEBUG-V3] Normalized Identifier: "vr9645"
+[2026-02-26T07:42:56.764Z] [AUTH-DEBUG-V3] User found: vr9645 | Role: employee | Saved Hash Start: $2b$10$V3s
+[2026-02-26T07:42:56.856Z] [AUTH-DEBUG-V3] Comparison result for "vr9645": true
+[2026-02-26T07:42:56.864Z] [AUTH-DEBUG-V3] Login SUCCESS for "vr9645"
+[2026-02-26T08:22:13.143Z] [AUTH-DEBUG-V3] Login attempt for identifier: "karan3501"
+[2026-02-26T08:22:13.144Z] [AUTH-DEBUG-V3] Normalized Identifier: "karan3501"
+[2026-02-26T08:22:13.148Z] [AUTH-DEBUG-V3] User found: karan3501 | Role: employee | Saved Hash Start: $2b$10$MzO
+[2026-02-26T08:22:13.238Z] [AUTH-DEBUG-V3] Comparison result for "karan3501": true
+[2026-02-26T08:22:13.252Z] [AUTH-DEBUG-V3] Login SUCCESS for "karan3501"
+[2026-02-26T12:58:46.890Z] [AUTH-DEBUG-V3] Login attempt for identifier: "deepak7379"
+[2026-02-26T12:58:46.897Z] [AUTH-DEBUG-V3] Normalized Identifier: "deepak7379"
+[2026-02-26T12:58:46.905Z] [AUTH-DEBUG-V3] User found: deepak7379 | Role: employee | Saved Hash Start: $2b$10$VnT
+[2026-02-26T12:58:47.030Z] [AUTH-DEBUG-V3] Comparison result for "deepak7379": true
+[2026-02-26T12:58:47.041Z] [AUTH-DEBUG-V3] Login SUCCESS for "deepak7379"
+[2026-02-26T16:32:55.944Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-26T16:32:55.946Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-26T16:32:55.963Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$JQe
+[2026-02-26T16:32:56.066Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-26T16:32:56.092Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-27T12:14:06.898Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-27T12:14:06.900Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-27T12:14:06.913Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$JQe
+[2026-02-27T12:14:07.011Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-27T12:14:07.034Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-27T12:16:16.058Z] [AUTH-DEBUG-V3] Login attempt for identifier: "vikas7580"
+[2026-02-27T12:16:16.058Z] [AUTH-DEBUG-V3] Normalized Identifier: "vikas7580"
+[2026-02-27T12:16:16.062Z] [AUTH-DEBUG-V3] User found: vikas7580 | Role: employee | Saved Hash Start: $2b$10$bF0
+[2026-02-27T12:16:16.148Z] [AUTH-DEBUG-V3] Comparison result for "vikas7580": true
+[2026-02-27T12:16:16.154Z] [AUTH-DEBUG-V3] Login SUCCESS for "vikas7580"
