@@ -31,23 +31,38 @@ const http = require('http');
 const server = http.createServer(app);
 const { initSocket, broadcastStatus } = require('./socket');
 const PORT = process.env.PORT || 5001;
-console.log(`[SERVER-START] Environment Check: Running on port ${PORT}`);
-console.log(`[SERVER-START] NODE_ENV=${process.env.NODE_ENV}`);
+
+console.log(`[SERVER-START] NODE_ENV=${process.env.NODE_ENV || 'development'}`);
+console.log(`[SERVER-START] Attempting to start on PORT=${PORT}`);
 
 // Initialize Socket.io
 initSocket(server);
 
+// Ensure "Company Team" group
+const { ensureCompanyGroup } = require('./controllers/chatController');
+ensureCompanyGroup();
+
 // Middleware
-app.use(cors({
-    origin: [
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? ['https://frontend-gyz4.onrender.com']
+    : [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
         'http://localhost:3000',
         'http://127.0.0.1:3000',
         'http://localhost:5174',
-        'http://127.0.0.1:5174',
-        'https://frontend-gyz4.onrender.com'
-    ],
+        'http://127.0.0.1:5174'
+    ];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -59,18 +74,50 @@ app.use((req, res, next) => {
 });
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const connectDB = require('./config/db');
+
+// Database Connection & Server Startup
+mongoose.set("strictQuery", false);
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(async () => {
+        console.log("MongoDB Connected");
+
+        // Startup cleanup: Clear any stale session state from previous server run
+        try {
+            await User.updateMany(
+                { currentSessionId: { $ne: null } },
+                { $set: { currentSessionId: null, isOnline: false, currentStatus: 'Offline' } }
+            );
+            console.log('[STARTUP] Stale session cleanup complete.');
+
+            // Birthday Diagnostic
+            const dobCount = await User.countDocuments({ dateOfBirth: { $exists: true, $ne: null }, isActive: true });
+            console.log(`[STARTUP] Birthday System: ${dobCount} active employees have DOB set.`);
+        } catch (err) {
+            console.error('[STARTUP-INITIALIZATION-ERROR]', err);
+        }
+
+        // Start Listen
+        app.listen(process.env.PORT || 5001, () => {
+            console.log(`Server running on port ${process.env.PORT || 5001}`);
+        });
+    })
+    .catch(err => {
+        console.error("MongoDB connection failed:", err);
+        process.exit(1);
+    });
 
 const authRoutes = require('./routes/authRoutes');
-const activityRoutes = require('./routes/activityRoutes');
-const taskRoutes = require('./routes/taskRoutes');
+const employeeRoutes = require('./routes/employeeRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const screenshotRoutes = require('./routes/screenshotRoutes');
-const chatRoutes = require('./routes/chatRoutes');
 const leaveRoutes = require('./routes/leaveRoutes');
-const employeeRoutes = require('./routes/employeeRoutes');
+const taskRoutes = require('./routes/taskRoutes');
+const activityRoutes = require('./routes/activityRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 const dailyUpdateRoutes = require('./routes/dailyUpdateRoutes');
 const birthdayRoutes = require('./routes/birthdayRoutes');
+
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -85,48 +132,12 @@ app.use('/api/daily-updates', dailyUpdateRoutes);
 app.use('/api/daily_updates', dailyUpdateRoutes); // Alias for reliability
 app.use('/api/birthdays', birthdayRoutes);
 
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-// Database Connection & Server Start
-const { ensureCompanyGroup } = require('./controllers/chatController');
-
-console.log('[STARTUP] Connecting to MongoDB...');
-connectDB()
-    .then(async () => {
-        console.log('[STARTUP] MongoDB Connected. Preparing server...');
-
-        // Startup tasks
-        try {
-            await User.updateMany(
-                { currentSessionId: { $ne: null } },
-                { $set: { currentSessionId: null, isOnline: false, currentStatus: 'Offline' } }
-            );
-            console.log('[STARTUP] Stale sessions cleaned.');
-
-            const dobCount = await User.countDocuments({ dateOfBirth: { $exists: true, $ne: null }, isActive: true });
-            console.log(`[STARTUP] Birthday System: ${dobCount} users ready.`);
-
-            await ensureCompanyGroup();
-
-            // Finally, listen
-            server.listen(PORT, () => {
-                console.log(`[READY] Server running on port ${PORT}`);
-                console.log(`[READY] Environment: ${process.env.NODE_ENV || 'development'}`);
-            });
-
-        } catch (startupErr) {
-            console.error('[STARTUP-ERROR] Task execution failed:', startupErr);
-            // We still start the server even if secondary tasks fail, as long as DB is up
-            server.listen(PORT, () => console.log(`[READY] Server running on port ${PORT} (with startup warnings)`));
-        }
-    })
-    .catch(err => {
-        console.error('[DB-FATAL] Database connection could not be established:', err);
-        process.exit(1);
-    });
-
+// server.listen(PORT, ...) is now inside connectDB().then()
 
 // Global Error Handler Middleware
 app.use((err, req, res, next) => {

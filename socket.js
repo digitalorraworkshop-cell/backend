@@ -8,10 +8,28 @@ let io;
 
 const initSocket = (server) => {
     console.log('[SOCKET] Initializing Socket.io...');
+    const allowedOrigins = process.env.NODE_ENV === 'production'
+        ? ['https://frontend-gyz4.onrender.com']
+        : [
+            'http://localhost:5173',
+            'http://127.0.0.1:5173',
+            'http://localhost:3000',
+            'http://127.0.0.1:3000',
+            'http://localhost:5174',
+            'http://127.0.0.1:5174'
+        ];
+
     io = new Server(server, {
         cors: {
-            origin: "*",
-            methods: ["GET", "POST"]
+            origin: function (origin, callback) {
+                if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+                    callback(null, true);
+                } else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
+            methods: ["GET", "POST"],
+            credentials: true
         }
     });
     console.log('[SOCKET] Socket.io attached to server.');
