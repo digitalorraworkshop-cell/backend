@@ -213,3 +213,13 @@
 [2026-02-28T07:14:27.471Z] [AUTH-DEBUG-V3] Login attempt for identifier: "digitalorraworkshop@gmail.com"
 [2026-02-28T07:14:27.472Z] [AUTH-DEBUG-V3] Normalized Identifier: "digitalorraworkshop@gmail.com"
 [2026-02-28T07:14:27.475Z] [AUTH-DEBUG-V3] User not found in DB for identifier: "digitalorraworkshop@gmail.com"
+[2026-02-28T07:26:17.902Z] [AUTH-DEBUG-V3] Login attempt for identifier: "admin@example.com"
+[2026-02-28T07:26:17.903Z] [AUTH-DEBUG-V3] Normalized Identifier: "admin@example.com"
+[2026-02-28T07:26:17.907Z] [AUTH-DEBUG-V3] User found: undefined | Role: admin | Saved Hash Start: $2b$10$JQe
+[2026-02-28T07:26:17.995Z] [AUTH-DEBUG-V3] Comparison result for "admin@example.com": true
+[2026-02-28T07:26:18.001Z] [AUTH-DEBUG-V3] Login SUCCESS for "undefined"
+[2026-02-28T07:29:53.641Z] [AUTH-DEBUG-V3] Login attempt for identifier: "rakesh7495"
+[2026-02-28T07:29:53.642Z] [AUTH-DEBUG-V3] Normalized Identifier: "rakesh7495"
+[2026-02-28T07:29:53.644Z] [AUTH-DEBUG-V3] User found: rakesh7495 | Role: employee | Saved Hash Start: $2b$10$5Bj
+[2026-02-28T07:29:53.730Z] [AUTH-DEBUG-V3] Comparison result for "rakesh7495": true
+[2026-02-28T07:29:53.738Z] [AUTH-DEBUG-V3] Login SUCCESS for "rakesh7495"

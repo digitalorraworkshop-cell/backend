@@ -46,9 +46,7 @@ app.use(cors({
         'http://127.0.0.1:3000',
         'http://localhost:5174',
         'http://127.0.0.1:5174',
-        'https://backend-upwl.onrender.com',
-        'https://frontend-gyz4.onrender.com',
-        /\.onrender\.com$/ // Allow all Render subdomains for flexibility
+        'https://frontend-gyz4.onrender.com'
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
