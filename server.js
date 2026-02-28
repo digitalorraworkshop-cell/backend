@@ -92,32 +92,40 @@ app.get('/', (req, res) => {
 // Database Connection & Server Start
 const { ensureCompanyGroup } = require('./controllers/chatController');
 
-connectDB().then(async () => {
-    // Startup cleanup: Clear any stale session state from previous server run
-    try {
-        await User.updateMany(
-            { currentSessionId: { $ne: null } },
-            { $set: { currentSessionId: null, isOnline: false, currentStatus: 'Offline' } }
-        );
-        console.log('[STARTUP] Stale session cleanup complete.');
+console.log('[STARTUP] Connecting to MongoDB...');
+connectDB()
+    .then(async () => {
+        console.log('[STARTUP] MongoDB Connected. Preparing server...');
 
-        // Birthday Diagnostic
-        const dobCount = await User.countDocuments({ dateOfBirth: { $exists: true, $ne: null }, isActive: true });
-        console.log(`[STARTUP] Birthday System: ${dobCount} active employees have DOB set.`);
+        // Startup tasks
+        try {
+            await User.updateMany(
+                { currentSessionId: { $ne: null } },
+                { $set: { currentSessionId: null, isOnline: false, currentStatus: 'Offline' } }
+            );
+            console.log('[STARTUP] Stale sessions cleaned.');
 
-        // Ensure "Company Team" group
-        await ensureCompanyGroup();
+            const dobCount = await User.countDocuments({ dateOfBirth: { $exists: true, $ne: null }, isActive: true });
+            console.log(`[STARTUP] Birthday System: ${dobCount} users ready.`);
 
-        // Start Server
-        server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+            await ensureCompanyGroup();
 
-    } catch (err) {
-        console.error('[STARTUP-ERROR]', err);
-    }
-}).catch(err => {
-    console.error('Failed to connect to MongoDB:', err);
-    process.exit(1);
-});
+            // Finally, listen
+            server.listen(PORT, () => {
+                console.log(`[READY] Server running on port ${PORT}`);
+                console.log(`[READY] Environment: ${process.env.NODE_ENV || 'development'}`);
+            });
+
+        } catch (startupErr) {
+            console.error('[STARTUP-ERROR] Task execution failed:', startupErr);
+            // We still start the server even if secondary tasks fail, as long as DB is up
+            server.listen(PORT, () => console.log(`[READY] Server running on port ${PORT} (with startup warnings)`));
+        }
+    })
+    .catch(err => {
+        console.error('[DB-FATAL] Database connection could not be established:', err);
+        process.exit(1);
+    });
 
 
 // Global Error Handler Middleware
