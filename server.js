@@ -44,14 +44,16 @@ ensureCompanyGroup();
 
 // Middleware
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://frontend-gyz4.onrender.com']
+    ? ['https://frontend-gyz4.onrender.com', 'https://backend-upwl.onrender.com']
     : [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
         'http://localhost:3000',
         'http://127.0.0.1:3000',
         'http://localhost:5174',
-        'http://127.0.0.1:5174'
+        'http://127.0.0.1:5174',
+        'http://localhost:5175',
+        'http://127.0.0.1:5175'
     ];
 
 app.use(cors({
@@ -80,7 +82,15 @@ mongoose.set("strictQuery", false);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(async () => {
-        console.log("MongoDB Connected");
+        console.log("-----------------------------------------");
+        console.log(`[DB] MongoDB Connected!`);
+        console.log(`[DB] Host: ${mongoose.connection.host}`);
+        console.log(`[DB] Database: ${mongoose.connection.name}`);
+        console.log("-----------------------------------------");
+
+        if (mongoose.connection.name !== 'employee-tracker') {
+            console.warn(`[DB-WARNING] You are connected to "${mongoose.connection.name}" instead of "employee-tracker". Check your MONGO_URI.`);
+        }
 
         // Startup cleanup: Clear any stale session state from previous server run
         try {
@@ -99,11 +109,14 @@ mongoose.connect(process.env.MONGO_URI)
 
         // Start Listen
         app.listen(process.env.PORT || 5001, () => {
-            console.log(`Server running on port ${process.env.PORT || 5001}`);
+            console.log(`[SERVER] Running on port ${process.env.PORT || 5001}`);
         });
     })
     .catch(err => {
-        console.error("MongoDB connection failed:", err);
+        console.error("-----------------------------------------");
+        console.error("[DB-FATAL] MongoDB connection failed!");
+        console.error("Error:", err.message);
+        console.log("-----------------------------------------");
         process.exit(1);
     });
 

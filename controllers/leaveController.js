@@ -1,6 +1,8 @@
 const Leave = require('../models/Leave');
 const LeaveBalance = require('../models/LeaveBalance');
 const User = require('../models/User');
+const cloudinary = require('../config/cloudinary');
+const fs = require('fs');
 
 // Helper: Calculate total days excluding weekends if NOT sandwich? 
 // No, prompt says: "If Holiday OR Weekly Off falls between leave days... Then Saturday must also count as leave."
@@ -103,6 +105,17 @@ const applyLeave = async (req, res) => {
             deductionAmount = ((user.perDaySalary || 0) / (user.workingHoursPerDay || 8)) * 2;
         }
 
+        let proofDocument = req.body.proofDocument || null;
+
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: 'leave_proofs',
+                public_id: `leave-proof-${req.user._id}-${Date.now()}`
+            });
+            proofDocument = result.secure_url;
+            fs.unlinkSync(req.file.path);
+        }
+
         const leave = await Leave.create({
             user: req.user._id,
             leaveType,
@@ -111,7 +124,7 @@ const applyLeave = async (req, res) => {
             reason,
             totalDays,
             deductionAmount,
-            proofDocument: req.body.proofDocument || (req.file ? `/uploads/${req.file.filename}` : null),
+            proofDocument,
             isEmergency,
             isSickness
         });

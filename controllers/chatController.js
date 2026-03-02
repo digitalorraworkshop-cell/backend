@@ -1,6 +1,8 @@
 const Message = require('../models/Message');
 const ChatGroup = require('../models/ChatGroup');
 const User = require('../models/User');
+const cloudinary = require('../config/cloudinary');
+const fs = require('fs');
 
 // @desc    Get messages between two users
 // @route   GET /api/chat/messages/:recipientId
@@ -188,8 +190,18 @@ const ensureCompanyGroup = async () => {
 const uploadImage = async (req, res) => {
     try {
         if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-        res.json({ url: req.file.path });
+
+        // Upload to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'chat_images',
+        });
+
+        // Clean up local file
+        fs.unlinkSync(req.file.path);
+
+        res.json({ url: result.secure_url });
     } catch (error) {
+        console.error('[CHAT-UPLOAD-ERROR]', error);
         res.status(500).json({ message: error.message });
     }
 };

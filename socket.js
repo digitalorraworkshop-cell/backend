@@ -9,14 +9,16 @@ let io;
 const initSocket = (server) => {
     console.log('[SOCKET] Initializing Socket.io...');
     const allowedOrigins = process.env.NODE_ENV === 'production'
-        ? ['https://frontend-gyz4.onrender.com']
+        ? ['https://frontend-gyz4.onrender.com', 'https://backend-upwl.onrender.com']
         : [
             'http://localhost:5173',
             'http://127.0.0.1:5173',
             'http://localhost:3000',
             'http://127.0.0.1:3000',
             'http://localhost:5174',
-            'http://127.0.0.1:5174'
+            'http://127.0.0.1:5174',
+            'http://localhost:5175',
+            'http://127.0.0.1:5175'
         ];
 
     io = new Server(server, {

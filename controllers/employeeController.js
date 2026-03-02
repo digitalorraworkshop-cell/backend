@@ -2,6 +2,8 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const Attendance = require('../models/Attendance');
+const cloudinary = require('../config/cloudinary');
+const fs = require('fs');
 
 // Generate strong random password
 const generatePassword = () => {
@@ -51,7 +53,16 @@ const generateUsername = async (name) => {
 const addEmployee = async (req, res) => {
     try {
         const { name, email, phone, position, salary, department, dateOfBirth } = req.body;
-        const profilePicture = req.file ? `/${req.file.path.replace(/\\/g, '/')}` : '';
+        let profilePicture = '';
+
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: 'employee_profiles',
+                public_id: `${name.replace(/\s+/g, '_').toLowerCase()}-${Date.now()}`
+            });
+            profilePicture = result.secure_url;
+            fs.unlinkSync(req.file.path);
+        }
 
         // Check if employee with same email exists
         const userExists = await User.findOne({ email });
@@ -127,7 +138,12 @@ const updateEmployee = async (req, res) => {
             user.dateOfBirth = dateOfBirth || user.dateOfBirth;
 
             if (req.file) {
-                user.profilePicture = `/${req.file.path.replace(/\\/g, '/')}`;
+                const result = await cloudinary.uploader.upload(req.file.path, {
+                    folder: 'employee_profiles',
+                    public_id: `${(name || user.name).replace(/\s+/g, '_').toLowerCase()}-${Date.now()}`
+                });
+                user.profilePicture = result.secure_url;
+                fs.unlinkSync(req.file.path);
             }
 
             const updatedUser = await user.save();

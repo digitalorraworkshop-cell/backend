@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const LeaveBalance = require('../models/LeaveBalance');
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
@@ -83,25 +84,34 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
     const { name, email, password, role, phone, position } = req.body;
 
-    const userExists = await User.findOne({ email });
+    console.log(`[AUTH-DEBUG] Registration attempt for: ${email}`);
 
-    if (userExists) {
-        res.status(400).json({ message: 'User already exists' });
-        return;
-    }
+    try {
+        const userExists = await User.findOne({ email: email.toLowerCase().trim() });
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-        role: role || 'employee',
-        phone,
-        position
-    });
+        if (userExists) {
+            console.log(`[AUTH-DEBUG] User already exists: ${email}`);
+            res.status(400).json({ message: 'User already exists' });
+            return;
+        }
 
-    if (user) {
+        console.log(`[AUTH-DEBUG] Creating new User object for: ${email}`);
+        const user = new User({
+            name,
+            email: email.toLowerCase().trim(),
+            password,
+            role: role || 'employee',
+            phone,
+            position
+        });
+
+        console.log(`[AUTH-DEBUG] Attempting to save user to DB: "${mongoose.connection.name}"`);
+        await user.save();
+        console.log(`[AUTH-DEBUG] User saved successfully. ID: ${user._id}`);
+
         // Initialize Leave Balance Protocol
         await LeaveBalance.create({ user: user._id, monthlyPaidLeaveBalance: 1 });
+        console.log(`[AUTH-DEBUG] Leave balance initialized for: ${user._id}`);
 
         res.status(201).json({
             _id: user._id,
@@ -110,8 +120,9 @@ const registerUser = async (req, res) => {
             role: user.role,
             token: generateToken(user._id, user.role),
         });
-    } else {
-        res.status(400).json({ message: 'Invalid user data' });
+    } catch (error) {
+        console.error(`[AUTH-DEBUG-ERROR] Registration failed:`, error.message);
+        res.status(400).json({ message: 'Invalid user data', error: error.message });
     }
 };
 
