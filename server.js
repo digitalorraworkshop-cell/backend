@@ -44,7 +44,7 @@ ensureCompanyGroup();
 
 // Middleware
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://frontend-gyz4.onrender.com', 'https://backend-upwl.onrender.com']
+    ? ['https://frontend-gyz4.onrender.com', 'https://backend-upwl.onrender.com', 'https://therakeshbedi.com', 'https://www.therakeshbedi.com']
     : [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
