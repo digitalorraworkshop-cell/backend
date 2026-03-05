@@ -19,6 +19,7 @@ const calculateLeaveDetails = (fromDate, toDate) => {
     return { totalDays: diffDays };
 };
 
+
 // @desc    Apply for leave
 // @route   POST /api/leaves
 // @access  Private (Employee)

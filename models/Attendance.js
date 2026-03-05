@@ -38,8 +38,16 @@ const attendanceSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Working', 'Completed', 'Absent', 'On Break'],
+        enum: ['Present', 'Absent', 'Late', 'Half Day', 'Working', 'Completed', 'On Break', 'Leave'],
         default: 'Working'
+    },
+    remarks: {
+        type: String,
+        default: ""
+    },
+    markedByAdmin: {
+        type: Boolean,
+        default: false
     },
     breakStartTime: {
         type: Date,

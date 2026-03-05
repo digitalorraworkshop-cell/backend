@@ -18,7 +18,6 @@ const generateToken = (id, role) => {
         expiresIn: '30d',
     });
 };
-
 // @desc    Auth user & get token
 // @route   POST /api/auth/login
 // @access  Public
@@ -77,6 +76,7 @@ const loginUser = async (req, res) => {
         res.status(401).json({ message: 'Invalid email or password' });
     }
 };
+
 
 // @desc    Register a new user (Admin only initially or for seed)
 // @route   POST /api/auth/register

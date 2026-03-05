@@ -108,7 +108,7 @@ mongoose.connect(process.env.MONGO_URI)
         }
 
         // Start Listen
-        app.listen(process.env.PORT || 5001, () => {
+        server.listen(process.env.PORT || 5001, () => {
             console.log(`[SERVER] Running on port ${process.env.PORT || 5001}`);
         });
     })
@@ -130,6 +130,7 @@ const activityRoutes = require('./routes/activityRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const dailyUpdateRoutes = require('./routes/dailyUpdateRoutes');
 const birthdayRoutes = require('./routes/birthdayRoutes');
+const assetRoutes = require('./routes/assetRoutes');
 
 
 // Routes
@@ -144,6 +145,7 @@ app.use('/api/employees', employeeRoutes);
 app.use('/api/daily-updates', dailyUpdateRoutes);
 app.use('/api/daily_updates', dailyUpdateRoutes); // Alias for reliability
 app.use('/api/birthdays', birthdayRoutes);
+app.use('/api/assets', assetRoutes);
 
 
 app.get('/', (req, res) => {
