@@ -130,11 +130,109 @@ const getEmployeeAssets = async (req, res) => {
     }
 };
 
+// @desc    Update product details
+// @route   PUT /api/assets/products/:id
+// @access  Private/AssetsManager
+const updateProduct = async (req, res) => {
+    try {
+        const { modelName, totalQuantity, price, condition, purchaseDate } = req.body;
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).json({ message: 'Product not found' });
+
+        // Calculate difference in totalQuantity to adjust availableQuantity
+        const diff = Number(totalQuantity) - Number(product.totalQuantity);
+        product.modelName = modelName || product.modelName;
+        product.totalQuantity = Number(totalQuantity);
+        product.availableQuantity = Math.max(0, product.availableQuantity + diff);
+        if (price !== undefined) product.price = Number(price);
+        if (condition) product.condition = condition;
+        if (purchaseDate) product.purchaseDate = purchaseDate;
+
+        await product.save();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// @desc    Delete product record
+// @route   DELETE /api/assets/products/:id
+// @access  Private/AssetsManager
+const deleteProduct = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).json({ message: 'Product not found' });
+
+        // Check if product has active distributions
+        const activeDist = await ProductDistribution.findOne({ product: req.params.id, status: 'Assigned' });
+        if (activeDist) {
+            return res.status(400).json({ message: 'Cannot delete product with active assigned distributions. Return items first.' });
+        }
+
+        await Product.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Product deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Get Asset statistics for Asset Manager Dashboard
+// @route   GET /api/assets/stats
+// @access  Private/AssetsManager
+const getAssetStats = async (req, res) => {
+    try {
+        const products = await Product.find();
+        const distributions = await ProductDistribution.find()
+            .populate('product')
+            .populate('employee', 'name email department')
+            .sort({ distributionDate: -1, createdAt: -1 });
+
+        const totalProducts = products.length;
+        let totalQuantity = 0;
+        let availableQuantity = 0;
+        let totalValuation = 0;
+
+        products.forEach(p => {
+            totalQuantity += (p.totalQuantity || 0);
+            availableQuantity += (p.availableQuantity || 0);
+            totalValuation += ((p.totalQuantity || 0) * (p.price || 0));
+        });
+
+        const distributedQuantity = totalQuantity - availableQuantity;
+
+        const conditionBreakdown = {
+            New: products.filter(p => p.condition === 'New').length,
+            Good: products.filter(p => p.condition === 'Good').length,
+            Used: products.filter(p => p.condition === 'Used').length,
+            Damaged: products.filter(p => p.condition === 'Damaged').length
+        };
+
+        const activeAssignmentsCount = distributions.filter(d => d.status === 'Assigned').length;
+
+        res.json({
+            totalProducts,
+            totalQuantity,
+            availableQuantity,
+            distributedQuantity,
+            totalValuation,
+            activeAssignmentsCount,
+            conditionBreakdown,
+            recentDistributions: distributions.slice(0, 6)
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     addProduct,
+    updateProduct,
+    deleteProduct,
     distributeProduct,
     returnProduct,
     getProducts,
     getDistributions,
-    getEmployeeAssets
+    getEmployeeAssets,
+    getAssetStats
 };
+

@@ -2,17 +2,25 @@ const express = require('express');
 const router = express.Router();
 const {
     addProduct,
+    updateProduct,
+    deleteProduct,
     distributeProduct,
     returnProduct,
     getProducts,
     getDistributions,
-    getEmployeeAssets
+    getEmployeeAssets,
+    getAssetStats
 } = require('../controllers/inventoryController');
-const { protect, admin, isAssetsManager } = require('../middleware/authMiddleware');
+const { protect, isAssetsManager } = require('../middleware/authMiddleware');
+
+// Stats Overview
+router.get('/stats', protect, isAssetsManager, getAssetStats);
 
 // Product Management
 router.post('/products', protect, isAssetsManager, addProduct);
 router.get('/products', protect, isAssetsManager, getProducts);
+router.put('/products/:id', protect, isAssetsManager, updateProduct);
+router.delete('/products/:id', protect, isAssetsManager, deleteProduct);
 
 // Distribution Management
 router.post('/distribute', protect, isAssetsManager, distributeProduct);
@@ -23,3 +31,4 @@ router.post('/return/:id', protect, isAssetsManager, returnProduct);
 router.get('/employee/:id', protect, getEmployeeAssets);
 
 module.exports = router;
+

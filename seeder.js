@@ -19,9 +19,18 @@ const importData = async () => {
             position: 'Administrator'
         };
 
-        await User.create(adminUser);
+        const assetsManagerUser = {
+            name: 'Manoj Sir',
+            email: 'manoj@example.com',
+            password: 'password123',
+            role: 'assets-manager',
+            phone: '9876543210',
+            position: 'Assets Manager'
+        };
 
-        console.log('Data Imported!');
+        await User.create([adminUser, assetsManagerUser]);
+
+        console.log('Data Imported! (Admin & Assets Manager Created)');
         process.exit();
     } catch (error) {
         console.error(`${error}`);
