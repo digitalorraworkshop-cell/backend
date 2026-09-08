@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const assetSchema = new mongoose.Schema({
+    assetId: {
+        type: String,
+        trim: true,
+        uppercase: true
+    },
     itemName: {
         type: String,
         required: [true, 'Item name is required'],
@@ -9,41 +14,55 @@ const assetSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Category is required'],
-        enum: ['Laptop', 'Desktop', 'Mobile', 'Software License', 'Office Equipment', 'ID Card', 'Other']
+        enum: ['Laptop', 'Computer', 'Desktop', 'Server', 'Monitor', 'Printer', 'Network Equipment', 'Software License', 'Mobile', 'Office Equipment', 'ID Card', 'Other'],
+        default: 'Laptop'
     },
     serialNumber: {
         type: String,
-        required: [true, 'Serial number or unique ID is required'],
-        unique: true,
         trim: true
     },
     purchaseDate: {
         type: Date,
-        required: [true, 'Purchase date is required']
+        default: Date.now
     },
     vendor: {
         type: String,
-        required: [true, 'Vendor name is required']
+        trim: true
     },
     cost: {
         type: Number,
-        required: [true, 'Cost is required'],
+        default: 0,
         min: 0
     },
     warrantyExpiry: {
         type: Date
     },
+    amcExpiry: {
+        type: Date
+    },
+    licenseExpiry: {
+        type: Date
+    },
     condition: {
         type: String,
         required: true,
-        enum: ['New', 'Good', 'Repair Needed', 'Damaged'],
+        enum: ['New', 'Good', 'Used', 'Repair Needed', 'Damaged'],
         default: 'New'
     },
     status: {
         type: String,
         required: true,
-        enum: ['Available', 'Assigned', 'In Repair', 'Retired'],
+        enum: ['In Use', 'Assigned', 'Available', 'Under Repair', 'Retired', 'Scrap', 'Lost/Damaged'],
         default: 'Available'
+    },
+    location: {
+        type: String,
+        trim: true,
+        default: 'Main Office'
+    },
+    department: {
+        type: String,
+        trim: true
     },
     description: {
         type: String,
@@ -70,12 +89,12 @@ const assetSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Middleware to auto-update status based on assignment
+// Middleware to sync status with assignment
 assetSchema.pre('save', async function () {
-    if (this.assignedTo) {
-        this.status = 'Assigned';
+    if (this.assignedTo && this.status !== 'Under Repair' && this.status !== 'Retired' && this.status !== 'Scrap') {
+        this.status = 'In Use';
         if (!this.assignDate) this.assignDate = new Date();
-    } else if (this.status === 'Assigned') {
+    } else if (!this.assignedTo && (this.status === 'In Use' || this.status === 'Assigned')) {
         this.status = 'Available';
         this.assignDate = null;
     }
