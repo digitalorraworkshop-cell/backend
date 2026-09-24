@@ -592,11 +592,16 @@ const startBreak = async (req, res) => {
         const today = new Date().toLocaleDateString('en-CA');
 
         const attendance = await Attendance.findOne({ user: userId, date: today });
-        if (!attendance || attendance.status !== 'Working') {
+        const hasActiveSession = attendance && attendance.checkInTime && !attendance.checkOutTime;
+
+        if (!hasActiveSession) {
             return res.status(400).json({ message: 'No active working session found' });
         }
-        if (attendance.breakStartTime) {
+        if (attendance.breakStartTime || attendance.status === 'On Break') {
             return res.status(400).json({ message: 'Already on break' });
+        }
+        if (attendance.meetingStartTime) {
+            return res.status(400).json({ message: 'Cannot start break while in meeting' });
         }
 
         attendance.breakStartTime = new Date();
@@ -622,11 +627,12 @@ const endBreak = async (req, res) => {
         const today = new Date().toLocaleDateString('en-CA');
 
         const attendance = await Attendance.findOne({ user: userId, date: today });
-        if (!attendance || !attendance.breakStartTime) {
+        if (!attendance || (!attendance.breakStartTime && attendance.status !== 'On Break')) {
             return res.status(400).json({ message: 'No active break found' });
         }
 
-        const breakDurationMs = new Date() - new Date(attendance.breakStartTime);
+        const breakStart = attendance.breakStartTime ? new Date(attendance.breakStartTime) : new Date();
+        const breakDurationMs = new Date() - breakStart;
         const breakMins = Math.max(0, Math.floor(breakDurationMs / 60000));
 
         attendance.breakMinutes = (attendance.breakMinutes || 0) + breakMins;
@@ -653,22 +659,22 @@ const startMeeting = async (req, res) => {
         const today = new Date().toLocaleDateString('en-CA');
 
         const attendance = await Attendance.findOne({ user: userId, date: today });
-        if (!attendance || attendance.status !== 'Working') {
+        const hasActiveSession = attendance && attendance.checkInTime && !attendance.checkOutTime;
+
+        if (!hasActiveSession) {
             return res.status(400).json({ message: 'No active working session found' });
         }
-        if (attendance.meetingStartTime || attendance.breakStartTime) {
-            return res.status(400).json({ message: 'Already on break or in meeting' });
+        if (attendance.meetingStartTime) {
+            return res.status(400).json({ message: 'Already in meeting' });
+        }
+        if (attendance.breakStartTime || attendance.status === 'On Break') {
+            return res.status(400).json({ message: 'Cannot start meeting while on break' });
         }
 
         attendance.meetingStartTime = new Date();
-        attendance.status = 'In Meeting'; // We can map this to Working or keep a new status.
-        // But the schema allows specific statuses. Since we didn't add In Meeting to schema enum, we can just use Working 
-        // but log the meetingStartTime. Wait, let's keep status 'Working' so it counts as work time!
-        // The user wants a meeting option. Meeting is working time.
-        // Wait, if it's working time, we just track the time inside meetingStartTime.
         await attendance.save();
 
-        res.status(200).json({ meetingStartTime: attendance.meetingStartTime, status: 'Working' });
+        res.status(200).json({ meetingStartTime: attendance.meetingStartTime, status: attendance.status });
     } catch (error) {
         console.error('[MEETING] Start Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -695,7 +701,7 @@ const endMeeting = async (req, res) => {
         attendance.meetingStartTime = null;
         await attendance.save();
 
-        res.status(200).json({ meetingMinutes: attendance.meetingMinutes, status: 'Working' });
+        res.status(200).json({ meetingMinutes: attendance.meetingMinutes, status: attendance.status });
     } catch (error) {
         console.error('[MEETING] End Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });

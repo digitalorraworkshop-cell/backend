@@ -167,6 +167,21 @@ mongoose.connect(process.env.MONGO_URI)
             console.error('[STARTUP-INITIALIZATION-ERROR]', err);
         }
 
+        // Handle Server Errors (e.g., EADDRINUSE)
+        server.on('error', (err) => {
+            if (err.code === 'EADDRINUSE') {
+                const port = process.env.PORT || 5001;
+                console.error("--------------------------------------------------------------------------------");
+                console.error(`[SERVER-ERROR] Port ${port} is already in use by another process.`);
+                console.error(`Your backend is ALREADY RUNNING in another terminal.`);
+                console.error(`To restart, first stop the existing process.`);
+                console.error("--------------------------------------------------------------------------------");
+            } else {
+                console.error('[SERVER-ERROR]', err);
+            }
+            process.exit(1);
+        });
+
         // Start Listen
         server.listen(process.env.PORT || 5001, () => {
             console.log(`[SERVER] Running on port ${process.env.PORT || 5001}`);

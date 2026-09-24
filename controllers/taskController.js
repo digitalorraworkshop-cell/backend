@@ -226,10 +226,23 @@ const startTrackingTask = async (req, res) => {
         }
         
         task.isTracking = true;
+        if (task.status === 'Pending') {
+            task.status = 'In Progress';
+        }
         task.currentTrackingStartTime = new Date();
         await task.save();
         
-        res.json(task);
+        const populatedTask = await Task.findById(task._id)
+            .populate('assignedTo', 'name email profilePicture')
+            .populate('assignedBy', 'name email role');
+
+        const io = getIo();
+        if (io) {
+            io.to(assigneeId).emit('taskUpdate', { type: 'TRACKING_STARTED', task: populatedTask });
+            io.to('admins').emit('taskUpdate', { type: 'TRACKING_STARTED', task: populatedTask });
+        }
+
+        res.json(populatedTask);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -258,7 +271,17 @@ const stopTrackingTask = async (req, res) => {
         task.currentTrackingStartTime = null;
         await task.save();
         
-        res.json(task);
+        const populatedTask = await Task.findById(task._id)
+            .populate('assignedTo', 'name email profilePicture')
+            .populate('assignedBy', 'name email role');
+
+        const io = getIo();
+        if (io) {
+            io.to(assigneeId).emit('taskUpdate', { type: 'TRACKING_STOPPED', task: populatedTask });
+            io.to('admins').emit('taskUpdate', { type: 'TRACKING_STOPPED', task: populatedTask });
+        }
+
+        res.json(populatedTask);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

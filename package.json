@@ -1,11 +1,10 @@
 {
-  "name": "tracker-root",
+  "name": "backend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "postinstall": "cd frontend && npm install",
-    "build": "cd frontend && npm install && npm run build && cd .. && node -e \"require('fs').cpSync('frontend/dist', 'dist', {recursive: true})\""
+    "dev": "node server.js"
   },
   "dependencies": {
     "axios": "^1.19.0",

@@ -34,3 +34,5 @@ logs/
 # Project Specific
 desktop/
 node_modules/
+uploads/
+
